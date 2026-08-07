@@ -5,6 +5,7 @@ gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 
 gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
+gem "inertia_rails", "~> 3.22"
 gem "jbuilder"
 gem "kamal", require: false
 gem "pg", "~> 1.1"
@@ -16,6 +17,7 @@ gem "solid_queue"
 gem "tailwindcss-rails"
 gem "thruster", require: false
 gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "vite_rails", "~> 3.11"
 
 # gem "redis", "~> 5.0"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
@@ -31,7 +33,3 @@ end
 group :development do
   gem "web-console"
 end
-
-gem "inertia_rails", "~> 3.22"
-
-gem "vite_rails", "~> 3.11"
