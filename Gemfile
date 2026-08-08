@@ -4,7 +4,7 @@ ruby "4.0.6"
 gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 
 gem "bootsnap", require: false
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.0"
 gem "inertia_rails", "~> 3.22"
 gem "jbuilder"
 gem "kamal", require: false
