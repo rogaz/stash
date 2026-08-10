@@ -25,7 +25,7 @@
     <%= vite_client_tag %>
     <%= vite_typescript_tag "inertia.tsx" %>
     <%= inertia_ssr_head %>
-    <%= vite_typescript_tag 'application' %>
+    <%= vite_typescript_tag 'application.tsx' %>
     <!--
       If using a TypeScript entrypoint file:
         vite_typescript_tag 'application'
@@ -39,7 +39,9 @@
   </head>
 
   <body>
-    <main>
+    <%= render 'layouts/menu' %>
+
+    <main class="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
       <%= yield %>
     </main>
   </body>
