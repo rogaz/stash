@@ -12,7 +12,7 @@ export default function Index({ snippets, flash }: Props) {
     <>
       <Head title="Snippets" />
 
-      <div className="Snippets">
+      <div className="max-w-2xl mx-auto py-8 p-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Snippets</h1>
           <Link

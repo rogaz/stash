@@ -1,11 +1,13 @@
-import { Head, Form, Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { PageProps, Snippet } from '../../types';
+import { DeleteButton } from "@/components/DeleteButton";
+import { Button } from "@/components/ui/button";
 
-type ShowSnippetProps = PageProps & {
+type Props = PageProps & {
   snippet: Snippet;
 }
 
-export default function Show({ snippet }: ShowSnippetProps) {
+export default function Show({ snippet }: Props) {
   return (
     <>
       <Head title={snippet.title} />
@@ -13,21 +15,12 @@ export default function Show({ snippet }: ShowSnippetProps) {
       <div className="max-w-2xl mx-auto py-8 p-4">
         <div className="flex items-center mb-6">
           <h1 className="flex-1 text-3xl font-bold">{snippet.title}</h1>
-          <Form method="delete" action={`/snippets/${snippet.id}`} className="inline">
-            <input type="hidden" name="_method" value="delete" />
-            <button
-              type="submit"
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Delete
-            </button>
-          </Form>
+          <DeleteButton href={`/snippets/${snippet.id}`} />
 
           <Link
             href={`/snippets/${snippet.id}/edit`}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ml-2"
           >
-            Edit
+            <Button className="ml-4">Edit</Button>
           </Link>
         </div>
 
