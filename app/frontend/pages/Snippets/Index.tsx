@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { Snippet, PageProps } from '../../types';
+import { DeleteButton } from '@/components/DeleteButton';
 
 // NOTE: We're using plain Tailwind CSS for styling in this component, and will add shdcn in the future.
 
@@ -12,7 +13,7 @@ export default function Index({ snippets, flash }: Props) {
     <>
       <Head title="Snippets" />
 
-      <div className="Snippets">
+      <div className="max-w-2xl mx-auto py-8 p-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Snippets</h1>
           <Link
@@ -45,17 +46,19 @@ export default function Index({ snippets, flash }: Props) {
 
 function SnippetCard({ snippet }: { snippet: Snippet }) {
   return (
-    <Link
-      href={`/snippets/${snippet.id}`}
-      className="block bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-sm transition"
-    >
+    <div className="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-sm transition">
       <div className="flex justify-between items-start">
-        <div className="flex-1">
-          <h2 className="text-xl font-semibold text-gray-900">{snippet.title}</h2>
-          {snippet.description && (
-            <p className="text-gray-600 mt-1">{snippet.description}</p>
-          )}
-        </div>
+        <Link
+            href={`/snippets/${snippet.id}`}
+
+          >
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold text-gray-900">{snippet.title}</h2>
+            {snippet.description && (
+              <p className="text-gray-600 mt-1">{snippet.description}</p>
+            )}
+          </div>
+        </Link>
         <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
           {snippet.snippet_type}
         </span>
@@ -65,7 +68,9 @@ function SnippetCard({ snippet }: { snippet: Snippet }) {
             {snippet.language}
           </span>
         )}
+
+        <DeleteButton href={`/snippets/${snippet.id}`} className="ml-4" size="sm" />
       </div>
-    </Link>
+    </div>
   )
 }
