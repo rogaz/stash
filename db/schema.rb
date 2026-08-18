@@ -10,19 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_07_203341) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_18_205726) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "folders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
 
   create_table "snippets", force: :cascade do |t|
     t.text "content", default: "", null: false
     t.datetime "created_at", null: false
     t.text "description"
     t.boolean "favorite", default: false, null: false
+    t.bigint "folder_id", null: false
     t.string "language"
     t.integer "snippet_type"
     t.string "title", default: "", null: false
     t.datetime "updated_at", null: false
+    t.index ["folder_id"], name: "index_snippets_on_folder_id"
     t.index ["title"], name: "index_snippets_on_title", unique: true
   end
+
+  create_table "taggings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "snippet_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snippet_id"], name: "index_taggings_on_snippet_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "color", default: "#000000", null: false
+    t.datetime "created_at", null: false
+    t.string "name", default: "", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "snippets", "folders"
+  add_foreign_key "taggings", "snippets"
+  add_foreign_key "taggings", "tags"
 end

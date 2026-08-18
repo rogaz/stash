@@ -1,4 +1,9 @@
 class Snippet < ApplicationRecord
+
+  belongs_to :folder
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   enum :snippet_type, { code: 0, prompt: 1, command: 2, note: 3 }
 
   validates :title, presence: true, uniqueness: true, length: { minimum: 4 }

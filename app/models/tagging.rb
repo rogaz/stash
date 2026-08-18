@@ -1,0 +1,4 @@
+class Tagging < ApplicationRecord
+  belongs_to :snippet
+  belongs_to :tag
+end
