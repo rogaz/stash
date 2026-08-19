@@ -2,6 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import { PageProps, Snippet } from '../../types';
 import { DeleteButton } from "@/components/DeleteButton";
 import { Button } from "@/components/ui/button";
+import { AppLayout } from "@/layouts/AppLayout";
 
 type Props = PageProps & {
   snippet: Snippet;
@@ -9,10 +10,10 @@ type Props = PageProps & {
 
 export default function Show({ snippet }: Props) {
   return (
-    <>
+    <AppLayout>
       <Head title={snippet.title} />
 
-      <div className="max-w-2xl mx-auto py-8 p-4">
+      <div className="py-8 p-4">
         <div className="flex items-center mb-6">
           <h1 className="flex-1 text-3xl font-bold">{snippet.title}</h1>
           <DeleteButton href={`/snippets/${snippet.id}`} />
@@ -35,6 +36,6 @@ export default function Show({ snippet }: Props) {
           <p>Updated At: {new Date(snippet.updated_at).toLocaleString()}</p>
         </div>
       </div>
-    </>
+    </AppLayout>
   );
 }

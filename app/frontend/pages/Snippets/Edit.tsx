@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import { PageProps, Snippet } from "../../types";
 import SnippetForm, { SnippetFormData } from "../../components/SnippetForm";
 import { useForm } from "@inertiajs/react";
+import { AppLayout } from "../../layouts/AppLayout";
 
 type Props = PageProps & {
   snippet: Snippet;
@@ -27,10 +28,10 @@ export default function Edit({ flash, errors, snippet, snippet_types }: Props) {
   };
 
   return (
-    <>
+    <AppLayout>
       <Head title={`Edit Snippet - ${snippet.title}`} />
 
-      <div className="max-w-2xl mx-auto py-8 p-4">
+      <div className="py-8 p-4">
         <h1 className="text-3xl font-bold mb-6">Edit Snippet</h1>
 
         {flash?.notice && (
@@ -50,6 +51,6 @@ export default function Edit({ flash, errors, snippet, snippet_types }: Props) {
           snippet_types={snippet_types}
         />
       </div>
-    </>
+    </AppLayout>
   );
 }

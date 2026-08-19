@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { Snippet, PageProps } from '../../types';
 import { DeleteButton } from '@/components/DeleteButton';
+import { AppLayout } from '../../layouts/AppLayout';
 
 // NOTE: We're using plain Tailwind CSS for styling in this component, and will add shdcn in the future.
 
@@ -8,12 +9,12 @@ interface Props extends PageProps {
   snippets: Snippet[];
 }
 
-export default function Index({ snippets, flash }: Props) {
+export default function Index({ snippets }: Props) {
   return (
-    <>
+    <AppLayout>
       <Head title="Snippets" />
 
-      <div className="max-w-2xl mx-auto py-8 p-4">
+      <div className="py-8 p-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Snippets</h1>
           <Link
@@ -23,12 +24,6 @@ export default function Index({ snippets, flash }: Props) {
             New Snippet
           </Link>
         </div>
-
-        {flash?.notice && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-            {flash.notice}
-          </div>
-        )}
 
         <div className="space-y-4">
           {snippets.map((snippet) => (
@@ -40,7 +35,7 @@ export default function Index({ snippets, flash }: Props) {
           <p className="text-gray-600">No snippets found. Create your first snippet!</p>
         )}
       </div>
-    </>
+    </AppLayout>
   )
 }
 

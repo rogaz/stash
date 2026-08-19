@@ -3,6 +3,7 @@ import { FormEvent } from "react";
 import { PageProps } from "../../types";
 import SnippetForm, { SnippetFormData } from "../../components/SnippetForm";
 import { useForm } from "@inertiajs/react";
+import { AppLayout } from "@/layouts/AppLayout";
 
 interface Props extends PageProps {
   snippet_types?: string[];
@@ -26,10 +27,10 @@ export default function New({ errors, snippet_types }: Props) {
   };
 
   return (
-    <>
+    <AppLayout>
       <Head title="New Snippet" />
 
-      <div className="max-w-2xl mx-auto py-8 p-4">
+      <div className="py-8 p-4">
         <h1 className="text-3xl font-bold mb-6">Create New Snippet</h1>
 
         <SnippetForm
@@ -43,6 +44,6 @@ export default function New({ errors, snippet_types }: Props) {
           snippet_types={snippet_types}
         />
       </div>
-    </>
+    </AppLayout>
   );
 }

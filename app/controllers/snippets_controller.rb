@@ -2,6 +2,8 @@ class SnippetsController < ApplicationController
   def index
     @snippets = Snippet.order(created_at: :desc)
 
+    flash[:notice] = 'Welcome to snippets'
+
     render inertia: "Snippets/Index", props: {
       snippets: @snippets.map { |s| serialize_snippet(s) }
   }
