@@ -1,7 +1,19 @@
+import * as React from 'react';
 import { Head, Link } from '@inertiajs/react';
-import { Snippet, PageProps } from '../../types';
-import { DeleteButton } from '@/components/DeleteButton';
-import { AppLayout } from '../../layouts/AppLayout';
+import { Snippet, PageProps } from '@/types';
+import { Button } from '@/components/ui/button';
+import { AppLayout } from '@/layouts/AppLayout';
+import { PageHeader } from "@/components/PageHeader";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemSeparator,
+  ItemTitle
+} from '@/components/ui/item'
+import { ChevronRight, Code, SquareCode, Star } from 'lucide-react'
 
 // NOTE: We're using plain Tailwind CSS for styling in this component, and will add shdcn in the future.
 
@@ -13,22 +25,47 @@ export default function Index({ snippets }: Props) {
   return (
     <AppLayout>
       <Head title="Snippets" />
+      <PageHeader title="Snippets" description="Manage your code snippets" />
 
-      <div className="py-8 p-4">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Snippets</h1>
-          <Link
-            href="/snippets/new"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-          >
-            New Snippet
-          </Link>
-        </div>
-
+      <div className="py-1">
         <div className="space-y-4">
-          {snippets.map((snippet) => (
-            <SnippetCard key={snippet.id} snippet={snippet} />
-          ))}
+          <ItemGroup>
+            {snippets.map((snippet, index) => (
+              <React.Fragment key={snippet.id}>
+                <Link href={`/snippets/${snippet.id}`}>
+                  <Item>
+                    <ItemContent className="gap-1">
+                      <ItemTitle className="font-semibold">{snippet.title}</ItemTitle>
+                      <ItemDescription className="flex items-center gap-2">
+                        <span className="flex items-center gap-1">
+                          <Code className="size-4"/>
+                          {snippet.language}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <SquareCode className="size-4" />
+                          {snippet.snippet_type}
+                        </span>
+                        { snippet.favorite &&
+                          <span className="flex items-center gap-1">
+                            <Star className="size-4 text-amber-500" />
+                          </span>
+                        }
+                      </ItemDescription>
+                    </ItemContent>
+                    <ItemActions>
+                      <Button
+                        variant="link"
+                        size="icon"
+                      >
+                        <ChevronRight />
+                      </Button>
+                    </ItemActions>
+                  </Item>
+                </Link>
+                {index !== snippets.length -1 && <ItemSeparator />}
+              </React.Fragment>
+            ))}
+          </ItemGroup>
         </div>
 
         {snippets.length === 0 && (
@@ -36,36 +73,5 @@ export default function Index({ snippets }: Props) {
         )}
       </div>
     </AppLayout>
-  )
-}
-
-function SnippetCard({ snippet }: { snippet: Snippet }) {
-  return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-sm transition">
-      <div className="flex justify-between items-start">
-        <Link
-            href={`/snippets/${snippet.id}`}
-
-          >
-          <div className="flex-1">
-            <h2 className="text-xl font-semibold text-gray-900">{snippet.title}</h2>
-            {snippet.description && (
-              <p className="text-gray-600 mt-1">{snippet.description}</p>
-            )}
-          </div>
-        </Link>
-        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-          {snippet.snippet_type}
-        </span>
-
-        {snippet.language && (
-          <span className=" ml-4 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
-            {snippet.language}
-          </span>
-        )}
-
-        <DeleteButton href={`/snippets/${snippet.id}`} className="ml-4" size="sm" />
-      </div>
-    </div>
   )
 }

@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+
+.font-instrument-sans {
+  font-family: 'Instrument Sans', sans-serif;
+}
 
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
@@ -132,10 +137,4 @@
   html {
     @apply font-sans;
   }
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
-
-.font-instrument-sans {
-  font-family: 'Instrument Sans', sans-serif;
 }

@@ -24,6 +24,7 @@ class SnippetsController < ApplicationController
 
   def create
     @snippet = Snippet.new(snippet_params)
+    @snippet.folder_id = Folder.first&.id
 
     if @snippet.save
       redirect_to snippets_path, notice: "Snippet created!"

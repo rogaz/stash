@@ -1,7 +1,8 @@
 import { Head } from "@inertiajs/react";
 import { FormEvent } from "react";
-import { PageProps } from "../../types";
-import SnippetForm, { SnippetFormData } from "../../components/SnippetForm";
+import { PageProps } from "@/types";
+import SnippetForm, { SnippetFormData } from "@/components/SnippetForm";
+import { PageHeader } from "@/components/PageHeader";
 import { useForm } from "@inertiajs/react";
 import { AppLayout } from "@/layouts/AppLayout";
 
@@ -28,22 +29,18 @@ export default function New({ errors, snippet_types }: Props) {
 
   return (
     <AppLayout>
-      <Head title="New Snippet" />
-
-      <div className="py-8 p-4">
-        <h1 className="text-3xl font-bold mb-6">Create New Snippet</h1>
-
-        <SnippetForm
-          data={data}
-          onDataChange={(key, value) => setData(key, value)}
-          onSubmit={handleSubmit}
-          isProcessing={processing}
-          submitLabel="Create Snippet"
-          cancelHref="/snippets"
-          allErrors={allErrors}
-          snippet_types={snippet_types}
-        />
-      </div>
+      <Head title="New Snippet"/>
+      <PageHeader title="New Snippet" description="Create a new code snippet" />
+      <SnippetForm
+        data={data}
+        onDataChange={(key, value) => setData(key, value)}
+        onSubmit={handleSubmit}
+        isProcessing={processing}
+        submitLabel="Create Snippet"
+        cancelHref="/snippets"
+        allErrors={allErrors}
+        snippet_types={snippet_types}
+      />
     </AppLayout>
   );
 }

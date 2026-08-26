@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react'
-import { Code, Star, Folder } from 'lucide-react'
+import { Code, Star, Folder, Plus } from 'lucide-react'
 import {
   Sidebar,
   SidebarHeader,
@@ -22,6 +22,11 @@ const pages = [
     title: "Favorites",
     url: '/snippets?favorites=true',
     icon: Star
+  },
+  {
+    title: "New Snippet",
+    url: "/snippets/new",
+    icon: Plus
   }
 ]
 

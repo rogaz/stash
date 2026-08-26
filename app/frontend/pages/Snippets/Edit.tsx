@@ -1,16 +1,17 @@
 import { Head } from "@inertiajs/react";
 import { FormEvent } from "react";
-import { PageProps, Snippet } from "../../types";
-import SnippetForm, { SnippetFormData } from "../../components/SnippetForm";
+import { PageProps, Snippet } from "@/types";
+import SnippetForm, { SnippetFormData } from "@/components/SnippetForm";
 import { useForm } from "@inertiajs/react";
-import { AppLayout } from "../../layouts/AppLayout";
+import { AppLayout } from "@/layouts/AppLayout";
+import { PageHeader } from "@/components/PageHeader";
 
 type Props = PageProps & {
   snippet: Snippet;
   snippet_types?: string[];
 };
 
-export default function Edit({ flash, errors, snippet, snippet_types }: Props) {
+export default function Edit({ errors, snippet, snippet_types }: Props) {
   const { data, setData, put, processing, errors: formErrors } = useForm<SnippetFormData>({
     title: snippet.title,
     content: snippet.content,
@@ -32,13 +33,7 @@ export default function Edit({ flash, errors, snippet, snippet_types }: Props) {
       <Head title={`Edit Snippet - ${snippet.title}`} />
 
       <div className="py-8 p-4">
-        <h1 className="text-3xl font-bold mb-6">Edit Snippet</h1>
-
-        {flash?.notice && (
-          <div className="mb-6 rounded border border-green-400 bg-green-100 px-4 py-3 text-green-700">
-            {flash.notice}
-          </div>
-        )}
+        <PageHeader title="Edit Snippet" description={`Editing snippet: ${snippet.title}`} />
 
         <SnippetForm
           data={data}
