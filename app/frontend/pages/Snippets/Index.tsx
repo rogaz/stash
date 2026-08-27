@@ -27,51 +27,49 @@ export default function Index({ snippets }: Props) {
       <Head title="Snippets" />
       <PageHeader title="Snippets" description="Manage your code snippets" />
 
-      <div className="py-1">
-        <div className="space-y-4">
-          <ItemGroup>
-            {snippets.map((snippet, index) => (
-              <React.Fragment key={snippet.id}>
-                <Link href={`/snippets/${snippet.id}`}>
-                  <Item>
-                    <ItemContent className="gap-1">
-                      <ItemTitle className="font-semibold">{snippet.title}</ItemTitle>
-                      <ItemDescription className="flex items-center gap-2">
+      <div className="space-y-4">
+        <ItemGroup>
+          {snippets.map((snippet, index) => (
+            <React.Fragment key={snippet.id}>
+              <Link href={`/snippets/${snippet.id}`}>
+                <Item>
+                  <ItemContent className="gap-1">
+                    <ItemTitle className="font-semibold">{snippet.title}</ItemTitle>
+                    <ItemDescription className="flex items-center gap-2">
+                      <span className="flex items-center gap-1">
+                        <Code className="size-4"/>
+                        {snippet.language}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <SquareCode className="size-4" />
+                        {snippet.snippet_type}
+                      </span>
+                      { snippet.favorite &&
                         <span className="flex items-center gap-1">
-                          <Code className="size-4"/>
-                          {snippet.language}
+                          <Star className="size-4 text-amber-500" />
                         </span>
-                        <span className="flex items-center gap-1">
-                          <SquareCode className="size-4" />
-                          {snippet.snippet_type}
-                        </span>
-                        { snippet.favorite &&
-                          <span className="flex items-center gap-1">
-                            <Star className="size-4 text-amber-500" />
-                          </span>
-                        }
-                      </ItemDescription>
-                    </ItemContent>
-                    <ItemActions>
-                      <Button
-                        variant="link"
-                        size="icon"
-                      >
-                        <ChevronRight />
-                      </Button>
-                    </ItemActions>
-                  </Item>
-                </Link>
-                {index !== snippets.length -1 && <ItemSeparator />}
-              </React.Fragment>
-            ))}
-          </ItemGroup>
-        </div>
-
-        {snippets.length === 0 && (
-          <p className="text-gray-600">No snippets found. Create your first snippet!</p>
-        )}
+                      }
+                    </ItemDescription>
+                  </ItemContent>
+                  <ItemActions>
+                    <Button
+                      variant="link"
+                      size="icon"
+                    >
+                      <ChevronRight />
+                    </Button>
+                  </ItemActions>
+                </Item>
+              </Link>
+              {index !== snippets.length -1 && <ItemSeparator />}
+            </React.Fragment>
+          ))}
+        </ItemGroup>
       </div>
+
+      {snippets.length === 0 && (
+        <p className="text-gray-600">No snippets found. Create your first snippet!</p>
+      )}
     </AppLayout>
   )
 }

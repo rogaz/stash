@@ -31,21 +31,17 @@ export default function Edit({ errors, snippet, snippet_types }: Props) {
   return (
     <AppLayout>
       <Head title={`Edit Snippet - ${snippet.title}`} />
-
-      <div className="py-8 p-4">
-        <PageHeader title="Edit Snippet" description={`Editing snippet: ${snippet.title}`} />
-
-        <SnippetForm
-          data={data}
-          onDataChange={(key, value) => setData(key, value)}
-          onSubmit={handleSubmit}
-          isProcessing={processing}
-          submitLabel="Update Snippet"
-          cancelHref={`/snippets/${snippet.id}`}
-          allErrors={allErrors}
-          snippet_types={snippet_types}
-        />
-      </div>
+      <PageHeader title="Edit Snippet" description={`Editing snippet: ${snippet.title}`} />
+      <SnippetForm
+        data={data}
+        onDataChange={(key, value) => setData(key, value)}
+        onSubmit={handleSubmit}
+        isProcessing={processing}
+        submitLabel="Update Snippet"
+        cancelHref={`/snippets/${snippet.id}`}
+        allErrors={allErrors}
+        snippet_types={snippet_types}
+      />
     </AppLayout>
   );
 }

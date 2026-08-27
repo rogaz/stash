@@ -20,17 +20,15 @@ export default function Show({ snippet }: Props) {
         </Link>
       </PageHeader>
 
-      <div className="py-8 p-4">
-        <div className="bg-gray-100 border border-gray-300 px-4 py-3 rounded mb-6">
-          <pre className="whitespace-pre-wrap">{snippet.content}</pre>
-        </div>
+      <div className="bg-gray-100 border border-gray-300 rounded p-4 mb-6 whitespace-pre-wrap">
+        {snippet.content}
+      </div>
 
-        <div className="text-sm text-gray-600">
-          <p>Type: {snippet.snippet_type}</p>
-          <p>Language: {snippet.language || 'N/A'}</p>
-          <p>Created At: {new Date(snippet.created_at).toLocaleString()}</p>
-          <p>Updated At: {new Date(snippet.updated_at).toLocaleString()}</p>
-        </div>
+      <div className="text-sm text-gray-600">
+        <p>Type: {snippet.snippet_type}</p>
+        <p>Language: {snippet.language || 'N/A'}</p>
+        <p>Created At: {new Date(snippet.created_at).toLocaleString()}</p>
+        <p>Updated At: {new Date(snippet.updated_at).toLocaleString()}</p>
       </div>
     </AppLayout>
   );
