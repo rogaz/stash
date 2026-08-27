@@ -2,7 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import { PageProps, Snippet } from '@/types';
 import { DeleteButton } from "@/components/DeleteButton";
 import { Button } from "@/components/ui/button";
-import { AppLayout } from "@/layouts/AppLayout";
+import { AppLayout, BreadcrumbItem } from "@/layouts/AppLayout";
 import { PageHeader } from "@/components/PageHeader";
 
 type Props = PageProps & {
@@ -10,8 +10,13 @@ type Props = PageProps & {
 }
 
 export default function Show({ snippet }: Props) {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: 'Snippets', href: '/snippets' },
+    { label: snippet.title }
+  ];
+
   return (
-    <AppLayout>
+    <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={snippet.title} />
       <PageHeader title={snippet.title} description={snippet.description ?? ""} >
         <DeleteButton href={`/snippets/${snippet.id}`} />

@@ -11,7 +11,18 @@ interface Props extends PageProps {
 }
 
 export default function New({ errors, snippet_types }: Props) {
-  const { data, setData, post, processing, errors: formErrors } = useForm<SnippetFormData>({
+  const breadcrumbs = [
+    { label: 'Snippets', href: '/snippets' },
+    { label: 'New Snippet' }
+  ];
+
+  const {
+    data,
+    setData,
+    post,
+    processing,
+    errors: formErrors
+  } = useForm<SnippetFormData>({
     title: "",
     content: "",
     language: "",
@@ -28,7 +39,7 @@ export default function New({ errors, snippet_types }: Props) {
   };
 
   return (
-    <AppLayout>
+    <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="New Snippet"/>
       <PageHeader title="New Snippet" description="Create a new code snippet" />
       <SnippetForm

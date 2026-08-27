@@ -6,6 +6,14 @@ import { Separator } from "@/components/ui/separator"
 import { AppSidebar } from "./AppSidebar"
 import { Flash } from "./Flash"
 import { Code } from "lucide-react"
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from "@/components/ui/breadcrumb"
 
 interface Folder {
   id: number
@@ -22,23 +30,55 @@ interface SharedProps {
 
 interface Props {
   children: ReactNode
+  breadcrumbs?: BreadcrumbItem[]
 }
 
-export function AppLayout({ children }: Props) {
+export interface BreadcrumbItem {
+  label: string
+  href?: string
+}
+
+export function AppLayout({ children, breadcrumbs }: Props) {
   const { folders, flash } = usePage<{ props: SharedProps }>().props as unknown as SharedProps
 
   return (
     <SidebarProvider>
       <AppSidebar folders={folders} />
       <SidebarInset>
-        <div className="flex items-center justify-between gap-2 py-2 px-4">
+        <div className="flex items-center justify-between py-2 px-4">
+          <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
-            <Button asChild size="sm">
+            <Separator orientation="vertical" className="mr-2" />
+            { breadcrumbs && breadcrumbs.length > 0 && (
+              <Breadcrumb>
+                <BreadcrumbList>
+                  {breadcrumbs.map((item, index) => (
+                    <BreadcrumbItem key={index}>
+                      {index < breadcrumbs.length - 1 ? (
+                        <>
+                          {item.href ? (
+                            <BreadcrumbLink asChild>
+                              <Link href={item.href}>{item.label}</Link>
+                            </BreadcrumbLink>
+                          ) : (
+                            <BreadcrumbLink>{item.label}</BreadcrumbLink>
+                          )}
+                          <BreadcrumbSeparator />
+                        </>
+                      ) : (
+                        <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                      )}
+                    </BreadcrumbItem>
+                  ))}
+                </BreadcrumbList>
+              </Breadcrumb>
+            )}
+            </div>
+            <Button variant="ghost" asChild size="sm">
               <Link href="/snippets/new"><Code className="mr-2 h-4 w-4" />New Snippet</Link>
             </Button>
         </div>
-        <main className="w-full min-h-screen p-4 font-instrument-sans py-8">
+        <main className="w-full min-h-screen p-4 font-instrument-sans py-4">
           <Flash flash={flash} />
           {children}
         </main>

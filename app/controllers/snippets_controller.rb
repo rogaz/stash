@@ -1,6 +1,7 @@
 class SnippetsController < ApplicationController
   def index
     @snippets = Snippet.order(created_at: :desc)
+    @snippets = @snippets.where(favorite: true) if params[:favorites] == "true"
 
     render inertia: "Snippets/Index", props: {
       snippets: @snippets.map { |s| serialize_snippet(s) }

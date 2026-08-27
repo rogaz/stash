@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { Snippet, PageProps } from '@/types';
 import { Button } from '@/components/ui/button';
-import { AppLayout } from '@/layouts/AppLayout';
+import { AppLayout, BreadcrumbItem } from '@/layouts/AppLayout';
 import { PageHeader } from "@/components/PageHeader";
 import {
   Item,
@@ -22,8 +22,12 @@ interface Props extends PageProps {
 }
 
 export default function Index({ snippets }: Props) {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: 'Snippets', href: '/snippets' }
+  ];
+
   return (
-    <AppLayout>
+    <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Snippets" />
       <PageHeader title="Snippets" description="Manage your code snippets" />
 

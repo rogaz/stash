@@ -12,7 +12,19 @@ type Props = PageProps & {
 };
 
 export default function Edit({ errors, snippet, snippet_types }: Props) {
-  const { data, setData, put, processing, errors: formErrors } = useForm<SnippetFormData>({
+  const breadcrumbs = [
+    { label: 'Snippets', href: '/snippets' },
+    { label: snippet.title, href: `/snippets/${snippet.id}` },
+    { label: 'Edit Snippet' }
+  ];
+
+  const {
+    data,
+    setData,
+    put,
+    processing,
+    errors: formErrors
+  } = useForm<SnippetFormData>({
     title: snippet.title,
     content: snippet.content,
     language: snippet.language || "",
@@ -29,7 +41,7 @@ export default function Edit({ errors, snippet, snippet_types }: Props) {
   };
 
   return (
-    <AppLayout>
+    <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={`Edit Snippet - ${snippet.title}`} />
       <PageHeader title="Edit Snippet" description={`Editing snippet: ${snippet.title}`} />
       <SnippetForm
