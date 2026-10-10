@@ -8,7 +8,7 @@ gem "image_processing", "~> 1.2"
 gem "inertia_rails", "~> 3.22"
 gem "jbuilder"
 gem "kamal", require: false
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.7"
 gem "propshaft"
 gem "puma", ">= 5.0"
 gem "solid_cable"
